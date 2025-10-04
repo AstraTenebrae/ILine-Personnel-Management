@@ -4,7 +4,7 @@
     {% for employee in employees.items %}
         <div> {{employee.id}}: {{employee.fullname}}, {{employee.position}}</div>
         <div> salary: {{employee.salary}}</div>
-        <div> manager: {{employee.manager}}</div>
+        <div> manager: {{employee.manager_id}}, {{employee.manager.fullname}}</div>
         <div> date: {{employee.date}}</div>
         <div></div>
     {% endfor %}
