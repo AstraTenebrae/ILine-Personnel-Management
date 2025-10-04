@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for employee in employees.items %}
+        <div> {{employee.id}}: {{employee.fullname}}, {{employee.position}}</div>
+        <div> salary: {{employee.salary}}</div>
+        <div> manager: {{employee.manager}}</div>
+        <div> date: {{employee.date}}</div>
+        <div></div>
+    {% endfor %}
+    <hr>
+    <div>Страница {{ employees.page }} из {{ employees.pages }}</div>
+{% endblock %}

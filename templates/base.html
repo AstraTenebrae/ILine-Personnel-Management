@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        {% if title %}
+        <title> {{title}} - Personnel Manager </title>
+        {% else %}
+        <title> Personnel Manager </title>
+        {% endif %}
+    </head>
+    <body>
+        <div> Personnel Management System </div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
