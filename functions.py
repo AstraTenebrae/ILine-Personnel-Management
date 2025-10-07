@@ -1,10 +1,10 @@
 from flask import request
-from database import db
+from database import Employee
 from sqlalchemy import desc, asc
 
 def sorting(query, model):
     """
-    Сортировка по одному или нескольким GET-параметрам вида (?sort=sort_by:sort_order,sort_by:sort_order...)
+    Сортировка по одному или нескольким GET-параметрам вида <?sort=sort_by:sort_order,sort_by:sort_order...>
     """
 
     sort_params=request.args.get('sort', '')
@@ -28,3 +28,26 @@ def sorting(query, model):
                 desc(sort_column) if order=='desc' else asc(sort_column)
             )
     return query
+
+def full_searching(query, model):
+    """
+    Поиск по полному совпадению ФИО сотрудника вида <?fullsearch=...>
+    """
+    search_param = request.args.get('fullsearch', '')
+    if not search_param:
+        return query
+    
+    query = query.filter(model.fullname == search_param)
+    return query
+
+def partial_searching(query, model):
+    """
+    Поиск по частичному совпадению ФИО сотрудника вида <?partsearch=...>
+    """   
+    search_param = request.args.get('partsearch', '')
+    if not search_param:
+        return query
+    
+    query = query.filter(model.fullname.ilike('%'+search_param+'%'))
+    return query
+    
